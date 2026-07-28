@@ -42,8 +42,8 @@ Con dos casos especiales para evitar errores matemáticos:
 
 A partir de la cuota (salida) se calculan los totales:
 
-total_abonos    = salida * n
-total_intereses = total_abonos - P
+- total_abonos    = salida * n
+- total_intereses = total_abonos - P
 
 SALIDAS
 

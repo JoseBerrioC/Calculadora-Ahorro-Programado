@@ -1,4 +1,5 @@
 # Calculadora-Ahorro-Programado
+Juan Sebastian Lopez y Jose Fernando Berrio
 
 Herramienta que calcula la cuota periódica fija de un préstamo o ahorro
 programado, junto con el total pagado y el total de intereses generados durante el plazo pactado. 
@@ -66,3 +67,6 @@ CASOS DE PRUEBA
   donde la formula devuelve resultados numéricos fuera de lo esperado
   en lugar de detener el calculo, evidenciando por que se necesita
   validar las entradas antes de calcular.
+
+  [Excel casos de prueba CL.xlsx](https://github.com/user-attachments/files/30485264/Excel.casos.de.prueba.CL.xlsx)
+

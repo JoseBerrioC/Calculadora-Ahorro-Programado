@@ -1,18 +1,16 @@
-import unittest
+import logica_calculadora
 
-from test_calculadora import (
-    TestCasosNormales,
-    TestCasosExcepcionales,
-    TestCasosDeError,
-)
+try:
+    print("Este programa le permite calcular la cuota fija a pagar por un prestamo o ahorro programado")
+    monto = float(input("Monto (P): "))
+    tasa = float(input("Tasa de interes por periodo, en % (ej. 3.1): ")) / 100
+    plazo = int(input("Numero de cuotas (n): "))
 
-def ejecutar_suite(titulo: str, clase_prueba) -> None:
-    print(f"=== {titulo} ===\n")
-    suite = unittest.TestLoader().loadTestsFromTestCase(clase_prueba)
-    unittest.TextTestRunner(verbosity=2).run(suite)
-    print("-" * 45 + "\n")
+    cuota, total_abonos, total_intereses = logica_calculadora.calcular_totales(monto, tasa, plazo)
 
-if __name__ == "_main_":
-    ejecutar_suite("Casos Normales", TestCasosNormales)
-    ejecutar_suite("Casos Excepcionales", TestCasosExcepcionales)
-    ejecutar_suite("Casos de Error", TestCasosDeError)
+    print(f"La cuota a pagar es de:     {round(cuota, 2)}")
+    print(f"Total Abonos:               {round(total_abonos, 2)}")
+    print(f"Total Intereses:            {round(total_intereses, 2)}")
+except Exception as err:
+    print("No se pudo calcular la cuota")
+    print(str(err))

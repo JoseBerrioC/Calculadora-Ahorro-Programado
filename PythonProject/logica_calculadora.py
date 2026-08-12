@@ -9,7 +9,6 @@ def calcular_cuota(P: float, i: float, n: int) -> float:
     except ZeroDivisionError:
         return 0.0
 
-
 def calcular_totales(P: float, i: float, n: int) -> tuple[float, float, float]:
     salida = calcular_cuota(P, i, n)
     total_abonos = salida * n

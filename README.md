@@ -68,5 +68,14 @@ CASOS DE PRUEBA
   en lugar de detener el calculo, evidenciando por que se necesita
   validar las entradas antes de calcular.
 
-  [Excel casos de prueba CL.xlsx](https://github.com/user-attachments/files/30485264/Excel.casos.de.prueba.CL.xlsx)
+ [Casos Prueba calculadora.xlsx](https://github.com/user-attachments/files/30966363/Casos.Prueba.calculadora.xlsx)
+
+  entrevista a experto:
+  
+
+https://github.com/user-attachments/assets/5cab3eb8-5e3b-4e5b-8952-a8fa483446e5
+
+
+
+
 

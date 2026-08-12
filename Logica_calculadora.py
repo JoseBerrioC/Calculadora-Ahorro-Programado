@@ -47,3 +47,10 @@ def mostrar_caso(nombre: str, P: float, i: float, n: int) -> None:
     print()
 
 
+def ejecutar_casos_normales() -> None:
+    print("=== Casos Normales ===\n")
+    mostrar_caso("Caso Normal",   200_000, 0.031, 36)
+    mostrar_caso("Caso Normal 2", 850_000, 0.034, 24)
+    mostrar_caso("Caso Normal 3", 350_000, 0.022, 18)
+
+

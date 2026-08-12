@@ -30,3 +30,20 @@ def calcular_totales(P: float, i: float, n: int) -> tuple[float, float, float]:
     return salida, total_abonos, total_intereses
 
 
+# ---------------------------------------------------------------------------
+# PRESENTACION EN CONSOLA
+# ---------------------------------------------------------------------------
+
+def mostrar_caso(nombre: str, P: float, i: float, n: int) -> None:
+    """Muestra un caso puntual."""
+   
+    salida, total_abonos, total_intereses = calcular_totales(P, i, n)
+
+    print(f"{nombre}")
+    print(f"  P = {P:,.0f}  |  i = {i:.2%}  |  n = {n}")
+    print(f"  Salida (cuota):   ${salida:,.2f}")
+    print(f"  Total Abonos:     ${total_abonos:,.2f}")
+    print(f"  Total Intereses:  ${total_intereses:,.2f}")
+    print()
+
+

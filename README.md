@@ -1,4 +1,4 @@
-#Calculadora de Ahorro Programado
+# Calculadora de Ahorro Programado
 
 Aplicación que calcula el valor de la cuota mensual constante que debe depositar una
 persona en una entidad financiera para alcanzar una meta de ahorro al final de un

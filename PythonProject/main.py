@@ -1,16 +1,38 @@
-import logica_calculadora
+import logica_ahorro
+
+
 
 try:
-    print("Este programa le permite calcular la cuota fija pagada por un prestamo o ahorro programado")
-    monto = float(input("Monto: "))
-    tasa = float(input("Tasa de interes por periodo: ")) / 100
-    plazo = int(input("Numero de cuotas: "))
+    print("Este programa le permite calcular la cuota mensual a ahorrar")
+    print("para alcanzar una meta de ahorro programado\n")
 
-    cuota, total_abonos, total_intereses = logica_calculadora.calcular_totales(monto, tasa, plazo)
+    meta = float(input("Meta de ahorro (M): "))
+    tasa = float(input("Tasa de interés periódica (mensual, en %): ")) / 100
+    plazo = float(input("Número de cuotas (meses) del plan de ahorro: "))
+    abono_extra_txt = input("Abono extra en la última cuota (Enter para omitir): ")
+    abono_extra = float(abono_extra_txt) if abono_extra_txt.strip() != "" else 0.0
 
-    print(f"La cuota pagada por el banco es de:     {round(cuota, 2)}")
-    print(f"Total Abonos:               {round(total_abonos, 2)}")
-    print(f"Total Intereses:            {round(total_intereses, 2)}")
+    cuota = round(logica_ahorro.calcular_cuota(meta, tasa, plazo, abono_extra), 2)
+    print(f"\nLa cuota mensual de ahorro requerida es de: {cuota}")
+
+    tabla = logica_ahorro.generar_tabla_acumulacion(meta, tasa, plazo, abono_extra)
+    totales = logica_ahorro.calcular_totales(tabla)
+
+    print("\nPeriodo\tSaldo Inicial\tCuota\t\tInterés\t\tAbono Extra\tSaldo Final")
+    for fila in tabla:
+        print(
+            f"{fila['periodo']}\t"
+            f"{round(fila['saldo_inicial'], 2)}\t"
+            f"{round(fila['cuota'], 2)}\t"
+            f"{round(fila['interes_ganado'], 2)}\t"
+            f"{round(fila['abono_extra'], 2)}\t\t"
+            f"{round(fila['saldo_final'], 2)}"
+        )
+
+    print(f"\nTotal aportado: {round(totales['total_aportado'], 2)}")
+    print(f"Total de interés generado: {round(totales['total_interes'], 2)}")
+    print(f"Saldo final (debe ser ≈ M): {round(totales['saldo_final'], 2)}")
+
 except Exception as err:
     print("No se pudo calcular la cuota")
     print(str(err))

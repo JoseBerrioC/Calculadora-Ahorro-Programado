@@ -1,208 +1,193 @@
 import unittest
+import logica_calculadora
 
-from logica_calculadora import calcular_totales
+class TestLogicaAhorro(unittest.TestCase):
 
-def mostrar_resultado(nombre, P, i, n, salida, total_abonos, total_intereses):
-    print(f"\n{nombre}")
-    print(f"  P = {P:,.0f}  |  i = {i:.2%}  |  n = {n}")
-    print(f"  Salida (cuota):   ${salida:,.2f}")
-    print(f"  Total Abonos:     ${total_abonos:,.2f}")
-    print(f"  Total Intereses:  ${total_intereses:,.2f}")
+    def test_caso_1_meta_1anio_sin_abono(self):
 
-class TestCasosNormales(unittest.TestCase):
+        # 1 Entradas
+        m = 10000000
+        tasa = 0.015
+        plazo = 12
+        abono_extra = 0
 
-    def test_caso_normal(self):
-       
-        P, i, n = 200_000, 0.031, 36
+        # 2 Salidas esperadas
+        cuota_esperada = 766799.93
 
-        salida_esperada = 9297.96
-        total_abonos_esperado = 334_726.53
-        total_intereses_esperado = 134_726.53
+        # 3 Funcionalidad
+        cuota_calculada = logica_calculadora.calcular_cuota(m, tasa, plazo, abono_extra)
 
-        salida, total_abonos, total_intereses = calcular_totales(P, i, n)
-        mostrar_resultado("Caso Normal", P, i, n, salida, total_abonos, total_intereses)
+        # 4 Verificar
+        self.assertAlmostEqual(cuota_esperada, cuota_calculada, 2)
 
-        self.assertAlmostEqual(salida_esperada, salida, 2)
-        self.assertAlmostEqual(total_abonos_esperado, total_abonos, 2)
-        self.assertAlmostEqual(total_intereses_esperado, total_intereses, 2)
+    def test_caso_2_meta_2anios_sin_abono(self):
 
-    def test_caso_normal_2(self):
-       
-        P, i, n = 850_000, 0.034, 24
+        # 1 Entradas
+        m = 5000000
+        tasa = 0.01
+        plazo = 24
+        abono_extra = 0
 
-        salida_esperada = 52_377.50
-        total_abonos_esperado = 1_257_059.97
-        total_intereses_esperado = 407_059.97
+        # 2 Salidas esperadas
+        cuota_esperada = 185367.36
 
-        salida, total_abonos, total_intereses = calcular_totales(P, i, n)
-        mostrar_resultado("Caso Normal 2", P, i, n, salida, total_abonos, total_intereses)
+        # 3 Funcionalidad
+        cuota_calculada = logica_calculadora.calcular_cuota(m, tasa, plazo, abono_extra)
 
-        self.assertAlmostEqual(salida_esperada, salida, 1)
-        self.assertAlmostEqual(total_abonos_esperado, total_abonos, 1)
-        self.assertAlmostEqual(total_intereses_esperado, total_intereses, 1)
+        # 4 Verificar
+        self.assertAlmostEqual(cuota_esperada, cuota_calculada, 2)
 
-    def test_caso_normal_3(self):
-       
-        P, i, n = 350_000, 0.022, 18
+    def test_caso_3_meta_18meses_con_abono(self):
 
-        salida_esperada = 23_758.26
-        total_abonos_esperado = 427_648.72
-        total_intereses_esperado = 77_648.72
+        # 1 Entradas
+        m = 20000000
+        tasa = 0.02
+        plazo = 18
+        abono_extra = 2000000
 
-        salida, total_abonos, total_intereses = calcular_totales(P, i, n)
-        mostrar_resultado("Caso Normal 3", P, i, n, salida, total_abonos, total_intereses)
+        # 2 Salidas esperadas
+        cuota_esperada = 840637.84
 
-        self.assertAlmostEqual(salida_esperada, salida, 1)
-        self.assertAlmostEqual(total_abonos_esperado, total_abonos, 1)
-        self.assertAlmostEqual(total_intereses_esperado, total_intereses, 1)
+        # 3 Funcionalidad
+        cuota_calculada = logica_calculadora.calcular_cuota(m, tasa, plazo, abono_extra)
 
-class TestCasosExcepcionales(unittest.TestCase):
+        # 4 Verificar
+        self.assertAlmostEqual(cuota_esperada, cuota_calculada, 2)
 
-    def test_cuota_unica(self):
-        # 1. Entradas
-        P, i, n = 90_000, 0.024, 1
+    def test_caso_4_plazo_un_periodo(self):
 
-        # 2. Salidas esperadas
-        salida_esperada = 90_000
-        total_abonos_esperado = 90_000
-        total_intereses_esperado = 0
+        # 1 Entradas
+        m = 1000000
+        tasa = 0.02
+        plazo = 1
+        abono_extra = 0
 
-        # 3. Funcionalidad
-        salida, total_abonos, total_intereses = calcular_totales(P, i, n)
-        mostrar_resultado("Cuota unica", P, i, n, salida, total_abonos, total_intereses)
+        # 2 Salidas esperadas
+        cuota_esperada = 1000000
 
-        # 4. Verificar
-        self.assertAlmostEqual(salida_esperada, salida, 2)
-        self.assertAlmostEqual(total_abonos_esperado, total_abonos, 2)
-        self.assertAlmostEqual(total_intereses_esperado, total_intereses, 2)
+        # 3 Funcionalidad
+        cuota_calculada = logica_calculadora.calcular_cuota(m, tasa, plazo, abono_extra)
 
-    def test_tasa_cero(self):
-        # 1. Entradas
-        P, i, n = 480_000, 0.0, 48
+        # 4 Verificar
+        self.assertAlmostEqual(cuota_esperada, cuota_calculada, 2)
 
-        # 2. Salidas esperadas
-        salida_esperada = 10_000
-        total_abonos_esperado = 480_000
-        total_intereses_esperado = 0
+    def test_caso_5_abono_casi_igual_meta(self):
 
-        # 3. Funcionalidad
-        salida, total_abonos, total_intereses = calcular_totales(P, i, n)
-        mostrar_resultado("Tasa cero", P, i, n, salida, total_abonos, total_intereses)
+        # 1 Entradas
+        m = 10000000
+        tasa = 0.015
+        plazo = 12
+        abono_extra = 9999999
 
-        # 4. Verificar
-        self.assertAlmostEqual(salida_esperada, salida, 2)
-        self.assertAlmostEqual(total_abonos_esperado, total_abonos, 2)
-        self.assertAlmostEqual(total_intereses_esperado, total_intereses, 2)
+        # 2 Salidas esperadas
+        cuota_esperada = 0.0767
 
-    def test_plazo_largo(self):
-        # 1. Entradas
-        P, i, n = 1_500_000, 0.015, 84
+        # 3 Funcionalidad
+        cuota_calculada = logica_calculadora.calcular_cuota(m, tasa, plazo, abono_extra)
 
-        # 2. Salidas esperadas
-        salida_esperada = 31_526.76
-        total_abonos_esperado = 2_648_247.59
-        total_intereses_esperado = 1_148_247.59
+        # 4 Verificar
+        self.assertAlmostEqual(cuota_esperada, cuota_calculada, 2)
 
-        # 3. Funcionalidad
-        salida, total_abonos, total_intereses = calcular_totales(P, i, n)
-        mostrar_resultado("Plazo largo", P, i, n, salida, total_abonos, total_intereses)
+    def test_caso_6_plazo_360meses(self):
 
-        # 4. Verificar
-        self.assertAlmostEqual(salida_esperada, salida, 2)
-        self.assertAlmostEqual(total_abonos_esperado, total_abonos, 2)
-        self.assertAlmostEqual(total_intereses_esperado, total_intereses, 2)
+        # 1 Entradas
+        m = 500000000
+        tasa = 0.008
+        plazo = 360
+        abono_extra = 0
 
-    def test_tasa_muy_baja(self):
-        # 1. Entradas
-        P, i, n = 600_000, 0.0005, 60
+        # 2 Salidas esperadas
+        cuota_esperada = 240799.85
 
-        # 2. Salidas esperadas
-        salida_esperada = 10_153.25
-        total_abonos_esperado = 609_194.98
-        total_intereses_esperado = 9_194.98
+        # 3 Funcionalidad
+        cuota_calculada = logica_calculadora.calcular_cuota(m, tasa, plazo, abono_extra)
 
-        # 3. Funcionalidad
-        salida, total_abonos, total_intereses = calcular_totales(P, i, n)
-        mostrar_resultado("Tasa muy baja", P, i, n, salida, total_abonos, total_intereses)
+        # 4 Verificar
+        self.assertAlmostEqual(cuota_esperada, cuota_calculada, 2)
 
-        # 4. Verificar
-        self.assertAlmostEqual(salida_esperada, salida, 2)
-        self.assertAlmostEqual(total_abonos_esperado, total_abonos, 2)
-        self.assertAlmostEqual(total_intereses_esperado, total_intereses, 2)
+    def test_caso_7_meta_invalida(self):
 
-class TestCasosDeError(unittest.TestCase):
+        # 1 Entradas
+        m = -5000000
+        tasa = 0.015
+        plazo = 12
+        abono_extra = 0
 
-    def test_usura(self):
-        # 1. Entradas
-        P, i, n = 50_000, 0.124, 60
+        # 2 Salidas esperadas
+        mensaje_esperado = 'Error: La meta de ahorro (M) debe ser mayor que cero'
 
-        # 2. Salidas esperadas
-        salida_esperada = 6205.58
-        total_abonos_esperado = 372_334.93
-        total_intereses_esperado = 322_334.93
+        # 3 Funcionalidad
+        try:
+            logica_calculadora.calcular_cuota(m, tasa, plazo, abono_extra)
+            mensaje_obtenido = "No se lanzó ninguna excepción"
+        except ValueError as err:
+            mensaje_obtenido = f"Error: {err}"
 
-        # 3. Funcionalidad
-        salida, total_abonos, total_intereses = calcular_totales(P, i, n)
-        mostrar_resultado("Usura", P, i, n, salida, total_abonos, total_intereses)
+        # 4 Verificar
+        self.assertEqual(mensaje_esperado, mensaje_obtenido)
 
-        # 4. Verificar
-        self.assertAlmostEqual(salida_esperada, salida, 2)
-        self.assertAlmostEqual(total_abonos_esperado, total_abonos, 2)
-        self.assertAlmostEqual(total_intereses_esperado, total_intereses, 2)
+    def test_caso_8_tasa_invalida(self):
 
-    def test_error_compra(self):
-        # 1. Entradas
-        P, i, n = 0, 0.024, 60
+        # 1 Entradas
+        m = 10000000
+        tasa = -0.01
+        plazo = 12
+        abono_extra = 0
 
-        # 2. Salidas esperadas
-        salida_esperada = 0
-        total_abonos_esperado = 0
-        total_intereses_esperado = 0
+        # 2 Salidas esperadas
+        mensaje_esperado = 'Error: La tasa de interés (i) debe ser mayor que cero'
 
-        # 3. Funcionalidad
-        salida, total_abonos, total_intereses = calcular_totales(P, i, n)
-        mostrar_resultado("Error Compra", P, i, n, salida, total_abonos, total_intereses)
+        # 3 Funcionalidad
+        try:
+            logica_calculadora.calcular_cuota(m, tasa, plazo, abono_extra)
+            mensaje_obtenido = "No se lanzó ninguna excepción"
+        except ValueError as err:
+            mensaje_obtenido = f"Error: {err}"
 
-        # 4. Verificar
-        self.assertAlmostEqual(salida_esperada, salida, 2)
-        self.assertAlmostEqual(total_abonos_esperado, total_abonos, 2)
-        self.assertAlmostEqual(total_intereses_esperado, total_intereses, 2)
+        # 4 Verificar
+        self.assertEqual(mensaje_esperado, mensaje_obtenido)
 
-    def test_error_cuotas(self):
-        # 1. Entradas
-        P, i, n = 80_000, 0.024, 0
+    def test_caso_9_periodos_invalidos(self):
 
-        # 2. Salidas esperadas
-        salida_esperada = 0
-        total_abonos_esperado = 0
-        total_intereses_esperado = -80_000
+        # 1 Entradas
+        m = 10000000
+        tasa = 0.015
+        plazo = 3.5
+        abono_extra = 0
 
-        # 3. Funcionalidad
-        salida, total_abonos, total_intereses = calcular_totales(P, i, n)
-        mostrar_resultado("Error Cuotas", P, i, n, salida, total_abonos, total_intereses)
+        # 2 Salidas esperadas
+        mensaje_esperado = 'Error: El número de periodos (n) debe ser un entero positivo'
 
-        # 4. Verificar
-        self.assertAlmostEqual(salida_esperada, salida, 2)
-        self.assertAlmostEqual(total_abonos_esperado, total_abonos, 2)
-        self.assertAlmostEqual(total_intereses_esperado, total_intereses, 2)
+        # 3 Funcionalidad
+        try:
+            logica_calculadora.calcular_cuota(m, tasa, plazo, abono_extra)
+            mensaje_obtenido = "No se lanzó ninguna excepción"
+        except ValueError as err:
+            mensaje_obtenido = f"Error: {err}"
 
-    def test_error_negativo(self):
-        # 1. Entradas
-        P, i, n = 50_000, 0.01, -10
+        # 4 Verificar
+        self.assertEqual(mensaje_esperado, mensaje_obtenido)
 
-        # 2. Salidas esperadas
-        salida_esperada = -4779.10
-        total_abonos_esperado = 47_791.04
-        total_intereses_esperado = -2_208.96
+    def test_caso_10_abono_invalido(self):
 
-        # 3. Funcionalidad
-        salida, total_abonos, total_intereses = calcular_totales(P, i, n)
-        mostrar_resultado("Error Negativo", P, i, n, salida, total_abonos, total_intereses)
+        # 1 Entradas
+        m = 10000000
+        tasa = 0.015
+        plazo = 12
+        abono_extra = 10000000
 
-        # 4. Verificar
-        self.assertAlmostEqual(salida_esperada, salida, 2)
-        self.assertAlmostEqual(total_abonos_esperado, total_abonos, 2)
-        self.assertAlmostEqual(total_intereses_esperado, total_intereses, 2)
+        # 2 Salidas esperadas
+        mensaje_esperado = 'Error: El abono extra (AE) debe ser menor que la meta de ahorro (M)'
+
+        # 3 Funcionalidad
+        try:
+            logica_calculadora.calcular_cuota(m, tasa, plazo, abono_extra)
+            mensaje_obtenido = "No se lanzó ninguna excepción"
+        except ValueError as err:
+            mensaje_obtenido = f"Error: {err}"
+
+        # 4 Verificar
+        self.assertEqual(mensaje_esperado, mensaje_obtenido)
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

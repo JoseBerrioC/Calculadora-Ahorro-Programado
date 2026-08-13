@@ -1,76 +1,70 @@
-# Calculadora-Ahorro-Programado
-Juan Sebastian Lopez y Jose Fernando Berrio
+# Calculadora de Ahorro Programado
 
-Herramienta que calcula la cuota periódica fija de un préstamo o ahorro
-programado, junto con el total pagado y el total de intereses generados durante el plazo pactado. 
+Aplicación que calcula el valor de la cuota mensual constante que debe depositar una
+persona en una entidad financiera para alcanzar una meta de ahorro al final de un
+plazo pactado, dada una tasa de interés fija. Permite además incluir un abono extra
+en la última cuota.
 
-Principalmente se hace en bancos (prestas al banco cierto dinero a ciertos meses y obtienes un beneficio), el beneficio depende de la cantidad de meses y de los intereses que el banco paga al usuario.
+1. Entradas
 
-ENTRADAS
+M	Meta de ahorro (valor futuro deseado)	M > 0
+i	Tasa de interés periódica (mensual, en decimal)	i > 0
+n	Número de periodos (meses) del plan	entero > 0
+AE	Abono extra en la última cuota (opcional, por defecto 0)	AE ≥ 0 y AE < M
 
-P (Monto):
-    Capital inicial del préstamo o ahorro (debe ser mayor a 0).
+Si la tasa se entrega en forma nominal anual (j) o efectiva anual (EA), debe
+convertirse a periódica mensual antes de ingresarla:
 
-i (Tasa de interés):
-    Tasa de interés POR PERIODO (mensual, no anual), expresada como
-    decimal. Ej: 3.10% se ingresa como 0.031.
+Nominal: i = j / 12
+Efectiva anual: i = (1 + EA)^(1/12) - 1
+2. Proceso
 
-n (Numero de cuotas):
-    Cantidad de periodos/pagos pactados.
+Validación de entradas (en este orden):
 
-IMPORTANTE PARA EL BUEN FUNCIONAMIENTO DE LA CALCULADORA Y PREEVER ERRORES: la tasa i debe corresponder al mismo periodo que n.
-Si n esta en meses, i debe ser la tasa mensual. Si se tiene una tasa
-efectiva anual, debe convertirse antes con:
+M <= 0 → Error: La meta de ahorro (M) debe ser mayor que cero
+i <= 0 → Error: La tasa de interés (i) debe ser mayor que cero
+n no entero o n <= 0 → Error: El número de periodos (n) debe ser un entero positivo
+AE >= M (o AE < 0) → Error: El abono extra (AE) debe ser menor que la meta de ahorro (M)
 
-i_mensual = (1 + i_anual) ** (1/12) - 1
+Cálculo de la cuota mensual (A):
 
-PROCESO (formulas aplicadas)
+A = (M - AE) * i / [ (1+i)^n - 1 ]
 
-Formula base:
+Cálculo de la tabla de acumulación, periodo a periodo (k = 1 … n):
 
-salida = P * i / (1 - (1 + i) ** -n)
+Interes_k = Saldo_(k-1) * i
 
-Con dos casos especiales para evitar errores matemáticos:
+Saldo_k = Saldo_(k-1) * (1+i) + A                   para k = 1 … n-1
+Saldo_n = Saldo_(n-1) * (1+i) + A + AE              (último periodo, incluye el abono extra)
 
-- Si n == 1:  salida = P
-      (un solo pago, no alcanza a generar interés)
+Cálculo de totales, sumando toda la tabla:
 
-- Si i == 0:  salida = P / n
-      (se reparte el monto en partes iguales, sin interés)
+Total cuotas       = Σ A
+Total interés       = Σ Interes_k
+Total abono extra   = AE
+Total aportado      = Total cuotas + Total abono extra
+Saldo final          = Saldo_n   (debe ser ≈ M)
+3. Salidas
+Cuota mensual de ahorro requerida (A), o el mensaje de error correspondiente.
 
+Totales:
+cuota mensual
+Total aportado
+Total de interés ganados
 
-- Caso general (n > 1 e i > 0): se aplica la formula completa.
+Casos de prueba
 
-A partir de la cuota (salida) se calculan los totales:
+El proyecto incluye 10 casos de prueba en Excel, para las entradas y salidas esperadas del código:
 
-- total_abonos    = salida * n
-- total_intereses = total_abonos - P
-
-SALIDAS
-
-salida:
-    Cuota fija pagada o ganada en cada periodo.
-
-total_abonos:
-    Suma de todas las cuotas pagadas durante los n periodos.
-
-total_intereses:
-    Total de intereses pagados (total_abonos - P).
-
-CASOS DE PRUEBA
-
-- Casos normales: entradas típicas y validas (montos, tasas y plazos
-  comunes).
-- Casos excepcionales: entradas validas pero en los limites de la
-  formula (n=1, i=0, tasas muy bajas, plazos muy largos).
-- Casos de error: entradas invalidas (monto <= 0, n=0, n negativo),
-  donde la formula devuelve resultados numéricos fuera de lo esperado
-  en lugar de detener el calculo, evidenciando por que se necesita
-  validar las entradas antes de calcular.
+3 normales: cálculo estándar de la cuota, con y sin abono extra.
+3 excepcionales: plazo de un solo periodo, abono extra casi igual a la meta,
+plazo muy largo (360 meses). Son válidos y no deben lanzar error.
+4 de error: meta inválida, tasa inválida, número de periodos inválido, abono
+extra igual o mayor a la meta.
 
  [Casos Prueba calculadora.xlsx](https://github.com/user-attachments/files/30966363/Casos.Prueba.calculadora.xlsx)
 
-  entrevista a experto:
+entrevista a experto:
   
 
 https://github.com/user-attachments/assets/5cab3eb8-5e3b-4e5b-8952-a8fa483446e5

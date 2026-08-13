@@ -1,4 +1,4 @@
-import logica_ahorro
+import logica_calculadora
 
 
 
@@ -12,11 +12,11 @@ try:
     abono_extra_txt = input("Abono extra en la última cuota (Enter para omitir): ")
     abono_extra = float(abono_extra_txt) if abono_extra_txt.strip() != "" else 0.0
 
-    cuota = round(logica_ahorro.calcular_cuota(meta, tasa, plazo, abono_extra), 2)
+    cuota = round(logica_calculadora.calcular_cuota(meta, tasa, plazo, abono_extra), 2)
     print(f"\nLa cuota mensual de ahorro requerida es de: {cuota}")
 
-    tabla = logica_ahorro.generar_tabla_acumulacion(meta, tasa, plazo, abono_extra)
-    totales = logica_ahorro.calcular_totales(tabla)
+    tabla = logica_calculadora.generar_tabla_acumulacion(meta, tasa, plazo, abono_extra)
+    totales = logica_calculadora.calcular_totales(tabla)
 
     print("\nPeriodo\tSaldo Inicial\tCuota\t\tInterés\t\tAbono Extra\tSaldo Final")
     for fila in tabla:

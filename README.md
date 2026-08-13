@@ -62,7 +62,8 @@ plazo muy largo (360 meses). Son válidos y no deben lanzar error.
 4 de error: meta inválida, tasa inválida, número de periodos inválido, abono
 extra igual o mayor a la meta.
 
- [Casos Prueba calculadora.xlsx](https://github.com/user-attachments/files/30966363/Casos.Prueba.calculadora.xlsx)
+ [Casos Prueba Ahorro Programado.xlsx](https://github.com/user-attachments/files/31009149/Casos.Prueba.Ahorro.Programado.xlsx)
+
 
 entrevista a experto:
   

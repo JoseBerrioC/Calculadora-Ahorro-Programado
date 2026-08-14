@@ -1,5 +1,9 @@
+import sys
+sys.path.append("Src")  
+
+
 import unittest
-import logica_calculadora
+from model import logica_calculadora
 
 class TestLogicaAhorro(unittest.TestCase):
 

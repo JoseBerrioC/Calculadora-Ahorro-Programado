@@ -33,6 +33,6 @@ try:
     print(f"Total de interés generado: {round(totales['total_interes'], 2)}")
     print(f"Saldo final (debe ser ≈ M): {round(totales['saldo_final'], 2)}")
 
-except Exception as err:
+except Exception as error:
     print("No se pudo calcular la cuota")
-    print(str(err))
+    print(str(error))

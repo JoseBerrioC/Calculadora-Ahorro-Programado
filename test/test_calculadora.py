@@ -1,5 +1,5 @@
 import sys
-sys.path.append("Src")  
+sys.path.append("src")  
 
 
 import unittest

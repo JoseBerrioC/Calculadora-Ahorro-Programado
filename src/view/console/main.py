@@ -1,4 +1,4 @@
-import logica_calculadora
+from model import logica_calculadora
 
 
 

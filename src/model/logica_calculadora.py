@@ -1,25 +1,36 @@
-def calcular_cuota(meta: float, tasa_interes: float, periodos: float, abono_extra: float = 0) -> float:
+class CalculadoraAhorro:
+    
+    # Clase para calcular la cuota de ahorro.
 
-    if meta <= 0:
-        raise ValueError("La meta de ahorro (M) debe ser mayor que cero")
+    def __init__(self, meta: float, tasa_interes: float, periodos: float, abono_extra: float = 0):
+        self.meta: float = meta
+        self.tasa_interes: float = tasa_interes
+        self.periodos: float = periodos
+        self.abono_extra: float = abono_extra
 
-    if tasa_interes <= 0:
-        raise ValueError("La tasa de interés (tasa_interes) debe ser mayor que cero")
+    def calcular_cuota(self) -> float:
+        
 
-    if periodos <= 0 or periodos != int(periodos):
-        raise ValueError("El número de periodos (periodos) debe ser un entero positivo")
+        if self.meta <= 0:
+            raise ValueError("La meta de ahorro (M) debe ser mayor que cero")
 
-    if abono_extra < 0 or abono_extra >= meta:
-        raise ValueError("El abono extra (AE) debe ser menor que la meta de ahorro (M)")
+        if self.tasa_interes <= 0:
+            raise ValueError("La tasa de interés (tasa_interes) debe ser mayor que cero")
 
-    periodos = int(periodos)
-    cuota = (meta - abono_extra) * tasa_interes / ((1 + tasa_interes) ** periodos - 1)
-    return cuota
+        if self.periodos <= 0 or self.periodos != int(self.periodos):
+            raise ValueError("El número de periodos (periodos) debe ser un entero positivo")
+
+        if self.abono_extra < 0 or self.abono_extra >= self.meta:
+            raise ValueError("El abono extra (AE) debe ser menor que la meta de ahorro (M)")
+
+        periodos = int(self.periodos)
+        cuota = (self.meta - self.abono_extra) * self.tasa_interes / ((1 + self.tasa_interes) ** periodos - 1)
+        return cuota
 
 
 def generar_tabla_acumulacion(meta: float, tasa_interes: float, periodos: float, abono_extra: float = 0) -> list:
   
-    cuota = calcular_cuota(meta, tasa_interes, periodos, abono_extra)
+    cuota = CalculadoraAhorro(meta, tasa_interes, periodos, abono_extra).calcular_cuota()
     periodos = int(periodos)
 
     tabla = []

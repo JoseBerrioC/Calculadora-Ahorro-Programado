@@ -19,7 +19,7 @@ class TestLogicaAhorro(unittest.TestCase):
         cuota_esperada = 766799.93
 
         # 3 Funcionalidad
-        cuota_calculada = logica_calculadora.calcular_cuota(meta, tasa, plazo, abono_extra)
+        cuota_calculada = logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
 
         # 4 Verificar
         self.assertAlmostEqual(cuota_esperada, cuota_calculada, 2)
@@ -36,7 +36,7 @@ class TestLogicaAhorro(unittest.TestCase):
         cuota_esperada = 185367.36
 
         # 3 Funcionalidad
-        cuota_calculada = logica_calculadora.calcular_cuota(meta, tasa, plazo, abono_extra)
+        cuota_calculada = logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
 
         # 4 Verificar
         self.assertAlmostEqual(cuota_esperada, cuota_calculada, 2)
@@ -53,7 +53,7 @@ class TestLogicaAhorro(unittest.TestCase):
         cuota_esperada = 840637.84
 
         # 3 Funcionalidad
-        cuota_calculada = logica_calculadora.calcular_cuota(meta, tasa, plazo, abono_extra)
+        cuota_calculada = logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
 
         # 4 Verificar
         self.assertAlmostEqual(cuota_esperada, cuota_calculada, 2)
@@ -70,7 +70,7 @@ class TestLogicaAhorro(unittest.TestCase):
         cuota_esperada = 1000000
 
         # 3 Funcionalidad
-        cuota_calculada = logica_calculadora.calcular_cuota(meta, tasa, plazo, abono_extra)
+        cuota_calculada = logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
 
         # 4 Verificar
         self.assertAlmostEqual(cuota_esperada, cuota_calculada, 2)
@@ -87,7 +87,7 @@ class TestLogicaAhorro(unittest.TestCase):
         cuota_esperada = 0.0767
 
         # 3 Funcionalidad
-        cuota_calculada = logica_calculadora.calcular_cuota(meta, tasa, plazo, abono_extra)
+        cuota_calculada = logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
 
         # 4 Verificar
         self.assertAlmostEqual(cuota_esperada, cuota_calculada, 2)
@@ -104,7 +104,7 @@ class TestLogicaAhorro(unittest.TestCase):
         cuota_esperada = 240799.85
 
         # 3 Funcionalidad
-        cuota_calculada = logica_calculadora.calcular_cuota(meta, tasa, plazo, abono_extra)
+        cuota_calculada = logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
 
         # 4 Verificar
         self.assertAlmostEqual(cuota_esperada, cuota_calculada, 2)
@@ -122,7 +122,7 @@ class TestLogicaAhorro(unittest.TestCase):
 
         # 3 Funcionalidad
         try:
-            logica_calculadora.calcular_cuota(meta, tasa, plazo, abono_extra)
+            logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
             mensaje_obtenido = "No se lanzó ninguna excepción"
         except ValueError as err:
             mensaje_obtenido = f"Error: {err}"
@@ -139,11 +139,11 @@ class TestLogicaAhorro(unittest.TestCase):
         abono_extra = 0
 
         # 2 Salidas esperadas
-        mensaje_esperado = 'Error: La tasa de interés (i) debe ser mayor que cero'
+        mensaje_esperado = 'Error: La tasa de interés (tasa_interes) debe ser mayor que cero'
 
         # 3 Funcionalidad
         try:
-            logica_calculadora.calcular_cuota(meta, tasa, plazo, abono_extra)
+            logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
             mensaje_obtenido = "No se lanzó ninguna excepción"
         except ValueError as err:
             mensaje_obtenido = f"Error: {err}"
@@ -160,11 +160,11 @@ class TestLogicaAhorro(unittest.TestCase):
         abono_extra = 0
 
         # 2 Salidas esperadas
-        mensaje_esperado = 'Error: El número de periodos (n) debe ser un entero positivo'
+        mensaje_esperado = 'Error: El número de periodos (periodos) debe ser un entero positivo'
 
         # 3 Funcionalidad
         try:
-            logica_calculadora.calcular_cuota(meta, tasa, plazo, abono_extra)
+            logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
             mensaje_obtenido = "No se lanzó ninguna excepción"
         except ValueError as err:
             mensaje_obtenido = f"Error: {err}"
@@ -185,7 +185,7 @@ class TestLogicaAhorro(unittest.TestCase):
 
         # 3 Funcionalidad
         try:
-            logica_calculadora.calcular_cuota(meta, tasa, plazo, abono_extra)
+            logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
             mensaje_obtenido = "No se lanzó ninguna excepción"
         except ValueError as err:
             mensaje_obtenido = f"Error: {err}"

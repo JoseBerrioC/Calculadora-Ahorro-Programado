@@ -1,32 +1,32 @@
-def calcular_cuota(m: float, i: float, n: float, ae: float = 0) -> float:
+def calcular_cuota(meta: float, tasa_interes: float, periodos: float, abono_extra: float = 0) -> float:
 
-    if m <= 0:
+    if meta <= 0:
         raise ValueError("La meta de ahorro (M) debe ser mayor que cero")
 
-    if i <= 0:
-        raise ValueError("La tasa de interés (i) debe ser mayor que cero")
+    if tasa_interes <= 0:
+        raise ValueError("La tasa de interés (tasa_interes) debe ser mayor que cero")
 
-    if n <= 0 or n != int(n):
-        raise ValueError("El número de periodos (n) debe ser un entero positivo")
+    if periodos <= 0 or periodos != int(periodos):
+        raise ValueError("El número de periodos (periodos) debe ser un entero positivo")
 
-    if ae < 0 or ae >= m:
+    if abono_extra < 0 or abono_extra >= meta:
         raise ValueError("El abono extra (AE) debe ser menor que la meta de ahorro (M)")
 
-    n = int(n)
-    cuota = (m - ae) * i / ((1 + i) ** n - 1)
+    periodos = int(periodos)
+    cuota = (meta - abono_extra) * tasa_interes / ((1 + tasa_interes) ** periodos - 1)
     return cuota
 
 
-def generar_tabla_acumulacion(m: float, i: float, n: float, ae: float = 0) -> list:
+def generar_tabla_acumulacion(meta: float, tasa_interes: float, periodos: float, abono_extra: float = 0) -> list:
   
-    cuota = calcular_cuota(m, i, n, ae)
-    n = int(n)
+    cuota = calcular_cuota(meta, tasa_interes, periodos, abono_extra)
+    periodos = int(periodos)
 
     tabla = []
     saldo_inicial = 0.0
-    for k in range(1, n + 1):
-        interes = saldo_inicial * i
-        abono_extra = ae if k == n else 0.0
+    for k in range(1, periodos + 1):
+        interes = saldo_inicial * tasa_interes
+        abono_extra = abono_extra if k == periodos else 0.0
         saldo_final = saldo_inicial + cuota + interes + abono_extra
 
         tabla.append({

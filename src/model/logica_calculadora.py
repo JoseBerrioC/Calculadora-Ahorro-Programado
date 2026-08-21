@@ -34,22 +34,22 @@ def generar_tabla_acumulacion(meta: float, tasa_interes: float, periodos: float,
     periodos = int(periodos)
 
     tabla = []
-    saldo_inicial = 0.0
+    SALDO_INICIAL = 0.0
     for k in range(1, periodos + 1):
-        interes = saldo_inicial * tasa_interes
+        interes = SALDO_INICIAL * tasa_interes
         abono_extra = abono_extra if k == periodos else 0.0
-        saldo_final = saldo_inicial + cuota + interes + abono_extra
+        saldo_final = SALDO_INICIAL + cuota + interes + abono_extra
 
         tabla.append({
             "periodo": k,
-            "saldo_inicial": saldo_inicial,
+            "SALDO_INICIAL": SALDO_INICIAL,
             "cuota": cuota,
             "interes_ganado": interes,
             "abono_extra": abono_extra,
             "saldo_final": saldo_final,
         })
 
-        saldo_inicial = saldo_final
+        SALDO_INICIAL = saldo_final
 
     return tabla
 

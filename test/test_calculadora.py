@@ -118,7 +118,7 @@ class TestLogicaAhorro(unittest.TestCase):
         abono_extra = 0
 
         # 2 Salidas esperadas
-        mensaje_esperado = 'Error: La meta de ahorro (M) debe ser mayor que cero'
+        mensaje_esperado = 'Error: La meta de ahorro debe ser mayor que cero'
 
         # 3 Funcionalidad
         try:
@@ -139,7 +139,7 @@ class TestLogicaAhorro(unittest.TestCase):
         abono_extra = 0
 
         # 2 Salidas esperadas
-        mensaje_esperado = 'Error: La tasa de interés (tasa_interes) debe ser mayor que cero'
+        mensaje_esperado = 'Error: La tasa de interés debe ser mayor que cero'
 
         # 3 Funcionalidad
         try:
@@ -160,7 +160,7 @@ class TestLogicaAhorro(unittest.TestCase):
         abono_extra = 0
 
         # 2 Salidas esperadas
-        mensaje_esperado = 'Error: El número de periodos (periodos) debe ser un entero positivo'
+        mensaje_esperado = 'Error: El número de periodos debe ser un entero positivo'
 
         # 3 Funcionalidad
         try:
@@ -181,7 +181,7 @@ class TestLogicaAhorro(unittest.TestCase):
         abono_extra = 10000000
 
         # 2 Salidas esperadas
-        mensaje_esperado = 'Error: El abono extra (AE) debe ser menor que la meta de ahorro (M)'
+        mensaje_esperado = 'Error: El abono extra debe ser menor que la meta de ahorro'
 
         # 3 Funcionalidad
         try:

@@ -62,6 +62,12 @@ plazo muy largo (360 meses). Son válidos y no deben lanzar error.
 4 de error: meta inválida, tasa inválida, número de periodos inválido, abono
 extra igual o mayor a la meta.
 
+4. Que se hace en cada carpeta?
+
+5. Como correr la aplicacion?
+    1) Asegurarse de que Python esta instalado en el equipo
+    2) 
+
  [Casos Prueba Ahorro Programado.xlsx](https://github.com/user-attachments/files/31009149/Casos.Prueba.Ahorro.Programado.xlsx)
 
 

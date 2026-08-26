@@ -32,7 +32,7 @@ class PeriodosInvalidos(Exception):
 class AbonoExtraInvalido(Exception):
     """Excepcion que se dispara cuando el abono extra es menor a cero"""
     def __init__(self):
-        super().__init__("El abono extra debe ser menor que la meta de ahorro ")
+        super().__init__("El abono extra debe ser menor que la meta de ahorro")
         
     def verificar_meta(self):
         

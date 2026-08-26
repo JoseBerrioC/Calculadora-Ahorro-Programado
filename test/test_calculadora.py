@@ -117,18 +117,10 @@ class TestLogicaAhorro(unittest.TestCase):
         plazo = 12
         abono_extra = 0
 
-        # 2 Salidas esperadas
-        mensaje_esperado = 'Error: La meta de ahorro (M) debe ser mayor que cero'
-
-        # 3 Funcionalidad
-        try:
-            logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
-            mensaje_obtenido = "No se lanzó ninguna excepción"
-        except logica_calculadora.MetaInvalida as error:
-            mensaje_obtenido = f"Error: {error}"
 
         # 4 Verificar
-        self.assertRaises(logica_calculadora.MetaInvalida)
+        with self.assertRaises(logica_calculadora.MetaInvalida):
+            logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
 
     def test_caso_8_tasa_invalida(self):
 
@@ -138,18 +130,10 @@ class TestLogicaAhorro(unittest.TestCase):
         plazo = 12
         abono_extra = 0
 
-        # 2 Salidas esperadas
-        mensaje_esperado = 'Error: La tasa de interés (tasa_interes) debe ser mayor que cero'
-
-        # 3 Funcionalidad
-        try:
-            logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
-            mensaje_obtenido = "No se lanzó ninguna excepción"
-        except logica_calculadora.TasaInteresInvalida as error:
-            mensaje_obtenido = f"Error: {error}"
 
         # 4 Verificar
-        self.assertRaises(logica_calculadora.TasaInteresInvalida)
+        with self.assertRaises(logica_calculadora.TasaInteresInvalida):
+            logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
 
     def test_caso_9_periodos_invalidos(self):
 
@@ -159,18 +143,10 @@ class TestLogicaAhorro(unittest.TestCase):
         plazo = 3.5
         abono_extra = 0
 
-        # 2 Salidas esperadas
-        mensaje_esperado = 'Error: El número de periodos (periodos) debe ser un entero positivo'
-
-        # 3 Funcionalidad
-        try:
-            logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
-            mensaje_obtenido = "No se lanzó ninguna excepción"
-        except logica_calculadora.PeriodosInvalidos as error:
-            mensaje_obtenido = f"Error: {error}"
 
         # 4 Verificar
-        self.assertRaises(logica_calculadora.PeriodosInvalidos)
+        with self.assertRaises(logica_calculadora.PeriodosInvalidos):
+            logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
 
     def test_caso_10_abono_invalido(self):
 
@@ -180,18 +156,9 @@ class TestLogicaAhorro(unittest.TestCase):
         plazo = 12
         abono_extra = 10000000
 
-        # 2 Salidas esperadas
-        mensaje_esperado = 'Error: El abono extra (AE) debe ser menor que la meta de ahorro (M)'
-
-        # 3 Funcionalidad
-        try:
-            logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
-            mensaje_obtenido = "No se lanzó ninguna excepción"
-        except logica_calculadora.AbonoExtraInvalido as error:
-            mensaje_obtenido = f"Error: {error}"
-
         # 4 Verificar
-        self.assertRaises(logica_calculadora.AbonoExtraInvalido)
+        with self.assertRaises(logica_calculadora.AbonoExtraInvalido):
+            logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -3,22 +3,6 @@ TASA_INTERES_MINIMA = 0
 MINIMO_PERIODOS = 0
 ABONO_EXTRA_MINIMO = 0
 
-class CalculadoraAhorro:
-    
-    # Clase para calcular la cuota de ahorro.
-
-    def __init__(self, meta: float, tasa_interes: float, periodos: float, abono_extra: float = 0):
-        self.meta: float = meta
-        self.tasa_interes: float = tasa_interes
-        self.periodos: float = periodos
-        self.abono_extra: float = abono_extra
-        
-    def calcular_cuota(self) -> float:
-        
-        periodos = int(self.periodos)
-        cuota = (self.meta - self.abono_extra) * self.tasa_interes / ((1 + self.tasa_interes) ** periodos - 1)
-        return cuota
-        
 class MetaInvalida(Exception):
     """Excepcion que se dispara cuando la meta es menor o igual que cero"""
     def __init__(self):
@@ -38,6 +22,16 @@ class AbonoExtraInvalido(Exception):
     """Excepcion que se dispara cuando el abono extra es menor a cero"""
     def __init__(self):
         super().__init__("El abono extra debe ser menor que la meta de ahorro")
+
+class CalculadoraAhorro:
+    
+    # Clase para calcular la cuota de ahorro.
+
+    def __init__(self, meta: float, tasa_interes: float, periodos: float, abono_extra: float = 0):
+        self.meta: float = meta
+        self.tasa_interes: float = tasa_interes
+        self.periodos: float = periodos
+        self.abono_extra: float = abono_extra
         
     def verificar_meta(self):
         
@@ -58,6 +52,16 @@ class AbonoExtraInvalido(Exception):
         
         if self.abono_extra < ABONO_EXTRA_MINIMO or self.abono_extra >= self.meta:
             raise AbonoExtraInvalido()
+        
+    def calcular_cuota(self) -> float:
+        
+        self.verificar_meta()
+        self.verificar_tasa_interes()
+        self.verificar_periodos()
+        self.verificar_abono_extra()
+        periodos = int(self.periodos)
+        cuota = (self.meta - self.abono_extra) * self.tasa_interes / ((1 + self.tasa_interes) ** periodos - 1)
+        return cuota
             
 
 

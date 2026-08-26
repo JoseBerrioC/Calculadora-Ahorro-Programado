@@ -3,8 +3,7 @@ TASA_INTERES_MINIMA = 0
 MINIMO_PERIODOS = 0
 ABONO_EXTRA_MINIMO = 0
 
-<<<<<<< HEAD
-=======
+
 class CalculadoraAhorro:
     
     """Calcula la cuota periódica constante necesaria para alcanzar una meta
@@ -23,7 +22,7 @@ class CalculadoraAhorro:
         cuota = (self.meta - self.abono_extra) * self.tasa_interes / ((1 + self.tasa_interes) ** periodos - 1)
         return cuota
         
->>>>>>> 9c2613fc45bd6a039de89d284ca13853ccaab0f1
+
 class MetaInvalida(Exception):
     """Excepcion que se dispara cuando la meta es menor o igual que cero"""
     def __init__(self):

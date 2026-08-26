@@ -183,12 +183,36 @@ Es el archivo de documentación principal del proyecto. Contiene la descripción
 
 5. # Como correr la aplicacion?
 
-     
+    Requisitos para ejecutar la aplicación
+Para ejecutar el proyecto desde otro equipo es necesario contar con:
+
+Python 3 instalado.
+Git instalado, si se desea clonar el proyecto directamente desde GitHub.
+Una terminal o consola de comandos.
+Opcionalmente, Visual Studio Code u otro editor de código.
+El proyecto no utiliza una base de datos ni requiere servicios externos para realizar los cálculos.
+
+Clonar el repositorio:
+
+git clone https://github.com/JoseBerrioC/Calculadora-Ahorro-Programado.git
+
+Entrar a la carpeta del proyecto:
+
+cd Calculadora-Ahorro-Programado
+
+Ejecutar la aplicación desde la terminal:
+
+python src/view/console/main.py
+
+La aplicación solicitará los datos necesarios y mostrará los resultados del cálculo.
+
+En resumen: cualquier equipo con Python instalado puede descargar el repositorio, ingresar a la carpeta del proyecto y ejecutar main.py. El proyecto no requiere instalar dependencias externas.
+
+6. # Casos de prueba en excel
 
  [Casos Prueba Ahorro Programado.xlsx](https://github.com/user-attachments/files/31009149/Casos.Prueba.Ahorro.Programado.xlsx)
 
-
-entrevista a experto:
+7. # entrevista a experto
   
 
 https://github.com/user-attachments/assets/5cab3eb8-5e3b-4e5b-8952-a8fa483446e5

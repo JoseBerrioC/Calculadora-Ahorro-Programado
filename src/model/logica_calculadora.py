@@ -7,25 +7,53 @@ class CalculadoraAhorro:
         self.tasa_interes: float = tasa_interes
         self.periodos: float = periodos
         self.abono_extra: float = abono_extra
-
+        
     def calcular_cuota(self) -> float:
         
-
-        if self.meta <= 0:
-            raise ValueError("La meta de ahorro (M) debe ser mayor que cero")
-
-        if self.tasa_interes <= 0:
-            raise ValueError("La tasa de interés (tasa_interes) debe ser mayor que cero")
-
-        if self.periodos <= 0 or self.periodos != int(self.periodos):
-            raise ValueError("El número de periodos (periodos) debe ser un entero positivo")
-
-        if self.abono_extra < 0 or self.abono_extra >= self.meta:
-            raise ValueError("El abono extra (AE) debe ser menor que la meta de ahorro (M)")
-
         periodos = int(self.periodos)
         cuota = (self.meta - self.abono_extra) * self.tasa_interes / ((1 + self.tasa_interes) ** periodos - 1)
         return cuota
+        
+class MetaInvalida(Exception):
+    """Excepcion que se dispara cuando la meta es menor o igual que cero"""
+    def __init__(self):
+        super().__init__("La meta de ahorro (M) debe ser mayor que cero")
+    
+class TasaInteresInvalida(Exception):
+    """Excepcion que se dispara cuando la tasa de interes es menor o igual a cero"""
+    def __init__(self):
+        super().__init__("La tasa de interés (tasa_interes) debe ser mayor que cero")
+    
+class PeriodosInvalidos(Exception):
+    """Excepcion que se dispara cuando los periodos es menor o igual a cero"""
+    def __init__(self):
+        super().__init__("El número de periodos (periodos) debe ser un entero positivo")
+    
+class AbonoExtraInvalido(Exception):
+    """Excepcion que se dispara cuando el abono extra es menor a cero"""
+    def __init__(self):
+        super().__init__("El abono extra debe ser menor que la meta de ahorro ")
+        
+    def verificar_meta(self):
+        
+        if self.meta <= 0:
+            raise MetaInvalida()
+        
+    def verificar_tasa_interes(self):
+        
+        if self.tasa_interes <= 0:
+            raise TasaInteresInvalida()
+        
+    def verificar_periodos(self):
+        
+        if self.periodos <= 0 or self.periodos != int(self.periodos):
+            raise PeriodosInvalidos()
+        
+    def verificar_abono_extra(self):
+        
+        if self.abono_extra < 0 or self.abono_extra >= self.meta:
+            raise AbonoExtraInvalido()
+            
 
 
 def generar_tabla_acumulacion(meta: float, tasa_interes: float, periodos: float, abono_extra: float = 0) -> list:

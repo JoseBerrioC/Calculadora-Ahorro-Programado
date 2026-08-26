@@ -124,11 +124,11 @@ class TestLogicaAhorro(unittest.TestCase):
         try:
             logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
             mensaje_obtenido = "No se lanzó ninguna excepción"
-        except ValueError as err:
+        except logica_calculadora.MetaInvalida as err:
             mensaje_obtenido = f"Error: {err}"
 
         # 4 Verificar
-        self.assertEqual(mensaje_esperado, mensaje_obtenido)
+        self.assertRaises(logica_calculadora.MetaInvalida)
 
     def test_caso_8_tasa_invalida(self):
 
@@ -145,11 +145,11 @@ class TestLogicaAhorro(unittest.TestCase):
         try:
             logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
             mensaje_obtenido = "No se lanzó ninguna excepción"
-        except ValueError as err:
+        except logica_calculadora.TasaInteresInvalida as err:
             mensaje_obtenido = f"Error: {err}"
 
         # 4 Verificar
-        self.assertEqual(mensaje_esperado, mensaje_obtenido)
+        self.assertRaises(logica_calculadora.TasaInteresInvalida)
 
     def test_caso_9_periodos_invalidos(self):
 
@@ -166,11 +166,11 @@ class TestLogicaAhorro(unittest.TestCase):
         try:
             logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
             mensaje_obtenido = "No se lanzó ninguna excepción"
-        except ValueError as err:
+        except logica_calculadora.PeriodosInvalidos as err:
             mensaje_obtenido = f"Error: {err}"
 
         # 4 Verificar
-        self.assertEqual(mensaje_esperado, mensaje_obtenido)
+        self.assertRaises(logica_calculadora.PeriodosInvalidos)
 
     def test_caso_10_abono_invalido(self):
 
@@ -187,11 +187,11 @@ class TestLogicaAhorro(unittest.TestCase):
         try:
             logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
             mensaje_obtenido = "No se lanzó ninguna excepción"
-        except ValueError as err:
+        except logica_calculadora.AbonoExtraInvalido as err:
             mensaje_obtenido = f"Error: {err}"
 
         # 4 Verificar
-        self.assertEqual(mensaje_esperado, mensaje_obtenido)
+        self.assertRaises(logica_calculadora.AbonoExtraInvalido)
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

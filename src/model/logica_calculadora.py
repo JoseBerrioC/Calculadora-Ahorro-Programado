@@ -6,17 +6,17 @@ ABONO_EXTRA_MINIMO = 0
 class MetaInvalida(Exception):
     """Excepcion que se dispara cuando la meta es menor o igual que cero"""
     def __init__(self):
-        super().__init__("La meta de ahorro (M) debe ser mayor que cero")
+        super().__init__("La meta de ahorro debe ser mayor que cero")
     
 class TasaInteresInvalida(Exception):
     """Excepcion que se dispara cuando la tasa de interes es menor o igual a cero"""
     def __init__(self):
-        super().__init__("La tasa de interés (tasa_interes) debe ser mayor que cero")
+        super().__init__("La tasa de interés debe ser mayor que cero")
     
 class PeriodosInvalidos(Exception):
     """Excepcion que se dispara cuando los periodos es menor o igual a cero"""
     def __init__(self):
-        super().__init__("El número de periodos (periodos) debe ser un entero positivo")
+        super().__init__("El número de periodos debe ser un entero positivo")
     
 class AbonoExtraInvalido(Exception):
     """Excepcion que se dispara cuando el abono extra es menor a cero"""

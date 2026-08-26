@@ -5,7 +5,9 @@ ABONO_EXTRA_MINIMO = 0
 
 class CalculadoraAhorro:
     
-    "Clase para calcular la cuota de ahorro."
+    """Calcula la cuota periódica constante necesaria para alcanzar una meta
+    de ahorro programada, dada una tasa de interés y un número de periodos,
+    con un abono extra opcional en el último periodo"""
 
     def __init__(self, meta: float, tasa_interes: float, periodos: float, abono_extra: float = 0):
         self.meta: float = meta

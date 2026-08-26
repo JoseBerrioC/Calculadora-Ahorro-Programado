@@ -124,8 +124,8 @@ class TestLogicaAhorro(unittest.TestCase):
         try:
             logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
             mensaje_obtenido = "No se lanzó ninguna excepción"
-        except logica_calculadora.MetaInvalida as err:
-            mensaje_obtenido = f"Error: {err}"
+        except logica_calculadora.MetaInvalida as error:
+            mensaje_obtenido = f"Error: {error}"
 
         # 4 Verificar
         self.assertRaises(logica_calculadora.MetaInvalida)
@@ -145,8 +145,8 @@ class TestLogicaAhorro(unittest.TestCase):
         try:
             logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
             mensaje_obtenido = "No se lanzó ninguna excepción"
-        except logica_calculadora.TasaInteresInvalida as err:
-            mensaje_obtenido = f"Error: {err}"
+        except logica_calculadora.TasaInteresInvalida as error:
+            mensaje_obtenido = f"Error: {error}"
 
         # 4 Verificar
         self.assertRaises(logica_calculadora.TasaInteresInvalida)
@@ -166,8 +166,8 @@ class TestLogicaAhorro(unittest.TestCase):
         try:
             logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
             mensaje_obtenido = "No se lanzó ninguna excepción"
-        except logica_calculadora.PeriodosInvalidos as err:
-            mensaje_obtenido = f"Error: {err}"
+        except logica_calculadora.PeriodosInvalidos as error:
+            mensaje_obtenido = f"Error: {error}"
 
         # 4 Verificar
         self.assertRaises(logica_calculadora.PeriodosInvalidos)
@@ -187,8 +187,8 @@ class TestLogicaAhorro(unittest.TestCase):
         try:
             logica_calculadora.CalculadoraAhorro(meta, tasa, plazo, abono_extra).calcular_cuota()
             mensaje_obtenido = "No se lanzó ninguna excepción"
-        except logica_calculadora.AbonoExtraInvalido as err:
-            mensaje_obtenido = f"Error: {err}"
+        except logica_calculadora.AbonoExtraInvalido as error:
+            mensaje_obtenido = f"Error: {error}"
 
         # 4 Verificar
         self.assertRaises(logica_calculadora.AbonoExtraInvalido)

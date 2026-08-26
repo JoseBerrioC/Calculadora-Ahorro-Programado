@@ -1,3 +1,8 @@
+META_MINIMA = 0
+TASA_INTERES_MINIMA = 0
+MINIMO_PERIODOS = 0
+ABONO_EXTRA_MINIMO = 0
+
 class CalculadoraAhorro:
     
     # Clase para calcular la cuota de ahorro.
@@ -36,22 +41,22 @@ class AbonoExtraInvalido(Exception):
         
     def verificar_meta(self):
         
-        if self.meta <= 0:
+        if self.meta <= META_MINIMA:
             raise MetaInvalida()
         
     def verificar_tasa_interes(self):
         
-        if self.tasa_interes <= 0:
+        if self.tasa_interes <= TASA_INTERES_MINIMA:
             raise TasaInteresInvalida()
         
     def verificar_periodos(self):
         
-        if self.periodos <= 0 or self.periodos != int(self.periodos):
+        if self.periodos <= MINIMO_PERIODOS or self.periodos != int(self.periodos):
             raise PeriodosInvalidos()
         
     def verificar_abono_extra(self):
         
-        if self.abono_extra < 0 or self.abono_extra >= self.meta:
+        if self.abono_extra < ABONO_EXTRA_MINIMO or self.abono_extra >= self.meta:
             raise AbonoExtraInvalido()
             
 
@@ -63,13 +68,13 @@ def generar_tabla_acumulacion(meta: float, tasa_interes: float, periodos: float,
 
     tabla = []
     SALDO_INICIAL = 0.0
-    for k in range(1, periodos + 1):
+    for periodo in range(1, periodos + 1):
         interes = SALDO_INICIAL * tasa_interes
-        abono_extra = abono_extra if k == periodos else 0.0
+        abono_extra = abono_extra if periodo == periodos else 0.0
         saldo_final = SALDO_INICIAL + cuota + interes + abono_extra
 
         tabla.append({
-            "periodo": k,
+            "periodo": periodo,
             "SALDO_INICIAL": SALDO_INICIAL,
             "cuota": cuota,
             "interes_ganado": interes,

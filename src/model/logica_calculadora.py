@@ -3,26 +3,6 @@ TASA_INTERES_MINIMA = 0
 MINIMO_PERIODOS = 0
 ABONO_EXTRA_MINIMO = 0
 
-
-class CalculadoraAhorro:
-    
-    """Calcula la cuota periódica constante necesaria para alcanzar una meta
-    de ahorro programada, dada una tasa de interés y un número de periodos,
-    con un abono extra opcional en el último periodo"""
-
-    def __init__(self, meta: float, tasa_interes: float, periodos: float, abono_extra: float = 0):
-        self.meta: float = meta
-        self.tasa_interes: float = tasa_interes
-        self.periodos: float = periodos
-        self.abono_extra: float = abono_extra
-        
-    def calcular_cuota(self) -> float:
-        
-        periodos = int(self.periodos)
-        cuota = (self.meta - self.abono_extra) * self.tasa_interes / ((1 + self.tasa_interes) ** periodos - 1)
-        return cuota
-        
-
 class MetaInvalida(Exception):
     """Excepcion que se dispara cuando la meta es menor o igual que cero"""
     def __init__(self):
@@ -45,13 +25,21 @@ class AbonoExtraInvalido(Exception):
 
 class CalculadoraAhorro:
     
-    # Clase para calcular la cuota de ahorro.
+    """Calcula la cuota periódica constante necesaria para alcanzar una meta
+        de ahorro programada, dada una tasa de interés y un número de periodos,
+        con un abono extra opcional en el último periodo"""
 
     def __init__(self, meta: float, tasa_interes: float, periodos: float, abono_extra: float = 0):
         self.meta: float = meta
         self.tasa_interes: float = tasa_interes
         self.periodos: float = periodos
         self.abono_extra: float = abono_extra
+
+    def calcular_cuota(self) -> float:
+            
+            periodos = int(self.periodos)
+            cuota = (self.meta - self.abono_extra) * self.tasa_interes / ((1 + self.tasa_interes) ** periodos - 1)
+            return cuota
         
     def verificar_meta(self):
         
@@ -94,7 +82,7 @@ def generar_tabla_acumulacion(meta: float, tasa_interes: float, periodos: float,
     saldo_inicial = 0.0
     for periodo in range(1, periodos + 1):
         interes = saldo_inicial * tasa_interes
-        abono_extra = abono_extra if periodo == periodos else 0.0
+        abono_extra_periodo = abono_extra if periodo == periodos else 0.0
         saldo_final = saldo_inicial + cuota + interes + abono_extra
 
         tabla.append({
@@ -102,7 +90,7 @@ def generar_tabla_acumulacion(meta: float, tasa_interes: float, periodos: float,
             "saldo_inicial": saldo_inicial,
             "cuota": cuota,
             "interes_ganado": interes,
-            "abono_extra": abono_extra,
+            "abono_extra": abono_extra_periodo,
             "saldo_final": saldo_final,
         })
 

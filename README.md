@@ -183,6 +183,8 @@ Es el archivo de documentación principal del proyecto. Contiene la descripción
 
 5. # Como correr la aplicacion?
 
+    # correr en interfaz por consola
+
     Requisitos para ejecutar la aplicación
 Para ejecutar el proyecto desde otro equipo es necesario contar con:
 
@@ -207,6 +209,58 @@ python src/view/console/main.py
 La aplicación solicitará los datos necesarios y mostrará los resultados del cálculo.
 
 En resumen: cualquier equipo con Python instalado puede descargar el repositorio, ingresar a la carpeta del proyecto y ejecutar main.py. El proyecto no requiere instalar dependencias externas.
+
+
+# correr pruebas unitarias
+
+Instalar y verificar Python
+En una terminal:
+
+Windows
+
+python --version
+
+Linux/macOS
+
+python3 --version
+
+Debe aparecer una versión de Python 3.
+
+2. Descargar el proyecto
+Si tienes Git instalado:
+
+git clone https://github.com/JoseBerrioC/Calculadora-Ahorro-Programado.git
+cd Calculadora-Ahorro-Programado
+
+3. Ejecutar las pruebas
+Desde la carpeta raíz del proyecto, ejecutar:
+
+Windows
+
+python -m unittest discover -s test -v
+
+Linux/macOS
+
+python3 -m unittest discover -s test -v
+
+Este comando busca automáticamente las pruebas dentro de la carpeta test y las ejecuta mostrando el resultado de cada una.
+
+4. Ejecutar las pruebas directamente
+También se pueden ejecutar con:
+
+python test/test_calculadora.py
+
+En Linux/macOS:
+
+python3 test/test_calculadora.py
+
+Es importante ejecutarlo desde la carpeta principal del proyecto, porque las pruebas utilizan la carpeta src.
+
+Comando principal
+En resumen, después de clonar el proyecto:
+
+cd Calculadora-Ahorro-Programado
+python -m unittest discover -s test -v
 
 6. # Casos de prueba en excel
 

@@ -1,9 +1,12 @@
+import os
 import sys
-sys.path.append("src")  
-
-
 import unittest
-from model import logica_calculadora
+
+# Dynamically add project root directory to sys.path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from src.model import logica_calculadora
+
 
 class TestLogicaAhorro(unittest.TestCase):
 

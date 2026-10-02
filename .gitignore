@@ -1,1 +1,16 @@
 __pycache__
+
+# Entorno virtual
+venv/
+
+# Artefactos del ejecutable de escritorio (PyInstaller)
+build/
+dist/
+*.spec
+*.exe
+# El spec de Buildozer (Android) SI se versiona
+!buildozer.spec
+
+# Artefactos de moviles
+bin/
+.buildozer/

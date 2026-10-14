@@ -1,0 +1,82 @@
+name: Compilar APK Android
+
+# Este proyecto se desarrolla en Windows, donde Buildozer no funciona.
+# Este flujo compila el APK en la nube (runner de Linux) y lo deja listo
+# para descargar y instalar en cualquier celular Android.
+#
+# EJECUTAR: Actions > "Compilar APK Android" > Run workflow.
+# (Tambien corre automaticamente al publicar una etiqueta v*).
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  android:
+    name: APK de Android
+    runs-on: ubuntu-22.04
+
+    env:
+      # Hace que autoreconf encuentre las macros de Libtool (libtool.m4),
+      # resolviendo "possibly undefined macro: LT_SYS_SYMBOL_USCORE".
+      ACLOCAL_PATH: /usr/share/aclocal
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias del sistema para Buildozer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            python3-pip python3-venv git zip unzip \
+            openjdk-17-jdk ccache \
+            autoconf automake libtool libtool-bin \
+            pkg-config m4 \
+            zlib1g-dev libncurses5-dev libffi-dev \
+            libjpeg-dev wget
+
+          # Hacer explicitamente visibles las macros de Libtool para autoconf.
+          test -f /usr/share/aclocal/libtool.m4
+          echo "ACLOCAL_PATH=$ACLOCAL_PATH"
+          aclocal --print-ac-dir
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Verificar Java
+        run: |
+          java -version
+          echo "JAVA_HOME=$JAVA_HOME"
+
+      - name: Instalar Buildozer, Python-for-Android y Cython
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install "Cython==0.29.36"
+          python -m pip install "sh>=1.10,<2"
+          python -m pip install \
+            "buildozer==1.5.0" \
+            "python-for-android==2024.1.21"
+          cython --version
+
+      - name: Limpiar compilaciones parciales
+        run: |
+          rm -rf .buildozer
+          rm -rf ~/.buildozer/android/platform/build-*
+
+      - name: Compilar APK
+        run: buildozer -v android debug
+
+      - name: Subir APK como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: calculadora-ahorro-android-apk
+          path: bin/*.apk

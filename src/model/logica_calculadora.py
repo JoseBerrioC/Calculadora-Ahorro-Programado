@@ -35,12 +35,6 @@ class CalculadoraAhorro:
         self.periodos: float = periodos
         self.abono_extra: float = abono_extra
 
-    def calcular_cuota(self) -> float:
-            
-            periodos = int(self.periodos)
-            cuota = (self.meta - self.abono_extra) * self.tasa_interes / ((1 + self.tasa_interes) ** periodos - 1)
-            return cuota
-        
     def verificar_meta(self):
         
         if self.meta <= META_MINIMA:
@@ -70,7 +64,11 @@ class CalculadoraAhorro:
         periodos = int(self.periodos)
         cuota = (self.meta - self.abono_extra) * self.tasa_interes / ((1 + self.tasa_interes) ** periodos - 1)
         return cuota
-            
+
+
+def calcular_cuota(meta: float, tasa_interes: float, periodos: float, abono_extra: float = 0) -> float:
+    """Calcula la cuota periódica requerida usando CalculadoraAhorro."""
+    return CalculadoraAhorro(meta, tasa_interes, periodos, abono_extra).calcular_cuota()
 
 
 def generar_tabla_acumulacion(meta: float, tasa_interes: float, periodos: float, abono_extra: float = 0) -> list:
@@ -83,7 +81,7 @@ def generar_tabla_acumulacion(meta: float, tasa_interes: float, periodos: float,
     for periodo in range(1, periodos + 1):
         interes = saldo_inicial * tasa_interes
         abono_extra_periodo = abono_extra if periodo == periodos else 0.0
-        saldo_final = saldo_inicial + cuota + interes + abono_extra
+        saldo_final = saldo_inicial + cuota + interes + abono_extra_periodo
 
         tabla.append({
             "periodo": periodo,
@@ -112,4 +110,16 @@ def calcular_totales(tabla: list) -> dict:
         "total_abono_extra": total_abono_extra,
         "total_aportado": total_cuotas + total_abono_extra,
         "saldo_final": saldo_final,
+    }
+
+
+def calcular_resultado_completo(meta: float, tasa_interes: float, periodos: float, abono_extra: float = 0) -> dict:
+    """Calcula la cuota, tabla de amortización y totales requeridos por la interfaz."""
+    cuota = calcular_cuota(meta, tasa_interes, periodos, abono_extra)
+    tabla = generar_tabla_acumulacion(meta, tasa_interes, periodos, abono_extra)
+    totales = calcular_totales(tabla)
+    return {
+        "cuota": cuota,
+        "tabla": tabla,
+        "totales": totales,
     }

@@ -281,6 +281,18 @@ python src/view/console/main.py
 ```
 
 ---
+#### C. Interfaz Web (HTML con Flask)
+
+Desde la raíz del proyecto, ejecuta:
+
+`ash
+python app.py
+`
+
+Luego abre en tu navegador: http://127.0.0.1:5000/
+
+---
+
 
 ### 5. Correr las pruebas unitarias
 

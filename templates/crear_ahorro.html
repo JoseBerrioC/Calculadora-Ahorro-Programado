@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculadora de Ahorro Programado</title>
+</head>
+
+<body>
+    
+    <form action="/buscar_ahorro">
+        <h2>Buscar un Plan de Ahorro</h2>
+        Escriba el identificador del plan:
+        <input type="text" name="id_buscado" required />
+        <button>Buscar</button>
+    </form>
+
+    <form action="/guardar_ahorro">
+        <h2>Insertar un Plan de Ahorro</h2>
+        <!-- La etiqueta table se usa para crear tablas en HTML -->
+        <table>
+            <!-- El elemento tr describe una fila de la tabla -->
+            <tr>
+                <!-- Cada elemento td corresponde a una celda dentro de la fila -->
+                <td>Identificador (ID)</td>
+                <td>
+                    <input type="text" name="id_plan" required />
+                </td>
+            </tr>
+            <tr>
+                <td>Nombre de la Meta</td>
+                <td>
+                    <input type="text" name="nombre_meta" required />
+                </td>
+            </tr>
+            <tr>
+                <td>Meta de Ahorro ($)</td>
+                <td>
+                    <input type="number" step="any" name="meta" required />
+                </td>
+            </tr>
+            <tr>
+                <td>Tasa de Interés Mensual (%)</td>
+                <td>
+                    <input type="number" step="any" name="tasa_interes" required />
+                </td>
+            </tr>
+            <tr>
+                <td>Número de Periodos (Meses)</td>
+                <td>
+                    <input type="number" name="periodos" required />
+                </td>
+            </tr>
+            <tr>
+                <td>Abono Extra (Opcional)</td>
+                <td>
+                    <input type="number" step="any" name="abono_extra" value="0" />
+                </td>
+            </tr>
+        </table>
+
+        <br>
+        <input type="submit" value="Guardar Plan de Ahorro" />
+    </form>
+
+    <p>
+        Si es la primera vez que ejecuta esta aplicación, necesitará crear las tablas en la base de datos
+        haciendo <a href="/crear_tablas">click aquí</a>.
+    </p>
+
+</body>
+
+</html>

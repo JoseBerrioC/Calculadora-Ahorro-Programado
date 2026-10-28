@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Plan de Ahorro Encontrado</title>
+</head>
+
+<body>
+ 
+    <h2>Información del Plan de Ahorro</h2>
+
+    {% if ahorro %}
+    <!-- La etiqueta table se usa para crear tablas en HTML -->
+    <table border="1">
+        <!-- El elemento tr describe una fila de la tabla -->
+        <tr>
+            <!-- Cada elemento td corresponde a una celda dentro de la fila -->
+            <td>Identificador (ID)</td>
+            <td>{{ ahorro.id_plan }}</td>
+        </tr>
+        <tr>
+            <td>Nombre de la Meta</td>
+            <td>{{ ahorro.nombre_meta }}</td>
+        </tr>
+        <tr>
+            <td>Meta de Ahorro</td>
+            <td>{{ ahorro.meta }}</td>
+        </tr>
+        <tr>
+            <td>Tasa de Interés Mensual</td>
+            <td>{{ ahorro.tasa_interes }}</td>
+        </tr>
+        <tr>
+            <td>Número de Periodos</td>
+            <td>{{ ahorro.periodos }}</td>
+        </tr>
+        <tr>
+            <td>Abono Extra</td>
+            <td>{{ ahorro.abono_extra }}</td>
+        </tr>
+        <tr>
+            <td>Cuota Mensual Calculada</td>
+            <td>{{ ahorro.cuota_mensual }}</td>
+        </tr>
+    </table>
+    {% else %}
+    <p>No se encontró ningún plan de ahorro con ese identificador.</p>
+    {% endif %}
+
+    <p>
+        <a href="/">Volver al formulario</a>
+    </p>
+
+</body>
+
+</html>

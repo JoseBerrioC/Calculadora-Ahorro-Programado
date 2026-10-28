@@ -3,7 +3,11 @@ import sys
 sys.path.append("src")
 
 from model.plan_ahorro import PlanAhorro
-from controller.plan_ahorro_controller import PlanAhorroController
+from controller.plan_ahorro_controller import (
+    PlanAhorroController, 
+    PlanAhorroNoEncontrado, 
+    PlanAhorroYaExiste
+)
 
 class TestPlanAhorroController(unittest.TestCase):
 
@@ -42,14 +46,14 @@ class TestPlanAhorroController(unittest.TestCase):
         plan1 = PlanAhorro("PLAN-DUP", "Original", 3000000.0, 0.01, 6, 0.0, 480000.0)
         plan2 = PlanAhorro("PLAN-DUP", "Copia", 4000000.0, 0.02, 12, 0.0, 300000.0)
         PlanAhorroController.insertar(plan1)
-        # Debe fallar por violación de clave primaria
+        # Debe fallar con PlanAhorroYaExiste o Exception general
         with self.assertRaises(Exception):
             PlanAhorroController.insertar(plan2)
 
     def test_error_buscar_inexistente(self):
-        """Caso 5 (Error): Buscar un registro que no existe retorna None."""
-        resultado = PlanAhorroController.buscar_por_id("PLAN-NO-EXISTE-999")
-        self.assertIsNone(resultado)
+        """Caso 5 (Error): Buscar un registro que no existe genera la excepción PlanAhorroNoEncontrado."""
+        with self.assertRaises(PlanAhorroNoEncontrado):
+            PlanAhorroController.buscar_por_id("PLAN-NO-EXISTE-999")
 
 if __name__ == "__main__":
     unittest.main()

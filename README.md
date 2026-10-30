@@ -3,14 +3,14 @@
 ## Link aplicación web
 
 La aplicación web está desplegada en Render:
- https://calculadora-ahorro-programado-4etq.onrender.com
+https://calculadora-ahorro-programado-4etq.onrender.com
 
 Aplicación que calcula el valor de la cuota mensual constante que debe depositar una
 persona en una entidad financiera para alcanzar una meta de ahorro al final de un
 plazo pactado, dada una tasa de interés fija. Permite además incluir un abono extra
 en la última cuota.
 
-1. # Entradas
+1. # Entradas 
 
 M Meta de ahorro (valor futuro deseado) M > 0
 i Tasa de interés periódica (mensual, en decimal) i > 0

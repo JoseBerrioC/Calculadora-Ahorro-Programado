@@ -290,7 +290,7 @@ python src/view/console/main.py
 
 Desde la raíz del proyecto, ejecuta:
 
-`ash
+`Bash
 python app.py
 `
 

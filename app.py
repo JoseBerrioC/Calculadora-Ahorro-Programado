@@ -43,7 +43,7 @@ def guardar_ahorro():
             return "Por favor ingrese valores numéricos válidos en los campos de monto, tasa y periodos. <br><br><a href='/'>Volver al formulario</a>"
 
         # Convertimos la tasa a decimal si se ingresó en porcentaje (ej: 1.5 -> 0.015)
-        tasa_decimal = tasa_interes / 100 if tasa_interes > 1 else tasa_interes
+        tasa_decimal = tasa_interes / 100
 
         # Calculamos la cuota con la lógica del proyecto (aplica validaciones de negocio)
         cuota = round(calcular_cuota(meta, tasa_decimal, periodos, abono_extra), 2)
